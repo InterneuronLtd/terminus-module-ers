@@ -1,0 +1,16 @@
+{
+    "dynamicApiEndpoints": {
+        "getSessionKeyUrl": "SYNAPSE_DYNAMIC_URI/Authenticator/GetSmartCardToken?userId="
+    },
+    "ersApiEndpoints": {
+        "createProfessionalSessionUrl": "NHSDigitalIntegration_API_URL/ERS/CreateProfessionalSession",
+        "selectProfessionalRoleUrl": "NHSDigitalIntegration_API_URL/ERS/SelectProfessionalRole",
+        "deleteProfessionalSessionUrl": "NHSDigitalIntegration_API_URL/ERS/DeleteProfessionalSession",
+        "retrieveWorklistUrl": "NHSDigitalIntegration_API_URL/ERS/RetrieveWorklist",
+        "retrieveReferralRequestUrl": "NHSDigitalIntegration_API_URL/ERS/RetrieveReferralRequest/",
+        "retrieveAttachmentUrl": "NHSDigitalIntegration_API_URL/ERS/RetrieveAttachment/"
+    },
+    "siteSettings": {
+        "loadTestData": false
+    }
+}

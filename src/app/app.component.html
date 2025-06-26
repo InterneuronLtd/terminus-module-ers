@@ -1,0 +1,182 @@
+<!--BEGIN LICENSE BLOCK--> 
+<!--Interneuron Terminus
+
+Copyright(C) 2025  Interneuron Limited
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.If not, see<http://www.gnu.org/licenses/>. -->
+<!--END LICENSE BLOCK--> 
+<div class="container-fluid">
+    <div class="row" *ngIf="!isViewMode">
+        <div class="col">
+            <button type="button" class="btn btn-primary mt-2" (click)="FetchWorklist()">Fetch Worklist</button>
+            <br />
+            <br />
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Referral Number</th>
+                        <th>Patient Name</th>
+                        <th>NHS Number</th>
+                        <th>Referral Date</th>
+                        <th>Referred To</th>
+                        <th>Specialty</th>
+                        <th>Priority</th>
+                        <th>Appointment Date Time</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let referral of referrals">
+                        <td><a href="#" (click)="onViewReferral(referral)">{{ referral.referralNo }}</a></td>
+                        <td>{{ referral.patientName }}</td>
+                        <td>{{ referral.nhsNo }}</td>
+                        <td>{{ referral.referralDate | date:'dd/MM/yyyy hh:mm' }}</td>
+                        <td>{{ referral.referredTo }}</td> 
+                        <td>{{ referral.specialty }}</td>
+                        <td>{{ referral.priority }}</td>
+                        <td>{{ referral.appointmentDtTime | date:'dd/MM/yyyy hh:mm' }}</td>         
+                    </tr>
+                </tbody>
+                <tbody>
+                    <tr>
+                        <td colspan="8" *ngIf="referrals.length == 0">
+                            <div class="text-center">No referrals for review</div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row" *ngIf="isViewMode">
+        <div class="col">
+            <div class="row">
+                <div class="col">
+                    <h4>Referral Details</h4>
+                </div>
+                <div class="col">
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-2">
+                    <b>UBRN:</b>
+                </div>
+                <div class="col">
+                    {{ selectedReferral.referralNo }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-2">
+                    <b>Patient Name:</b>
+                </div>
+                <div class="col">
+                    {{ selectedReferral.patientName }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-2">
+                    <b>NHS No:</b>
+                </div>
+                <div class="col">
+                    {{ selectedReferral.nhsNo }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-2">
+                    <b>Referral Date:</b>
+                </div>
+                <div class="col">
+                    {{ selectedReferral.referralDate | date:'dd/MM/yyyy hh:mm' }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-2">
+                    <b>Referred To:</b>
+                </div>
+                <div class="col">
+                    {{ selectedReferral.referredTo }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-2">
+                    <b>Specialty:</b>
+                </div>
+                <div class="col">
+                    {{ selectedReferral.specialty }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-2">
+                    <b>Priority:</b>
+                </div>
+                <div class="col">
+                    {{ selectedReferral.priority }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-2">
+                    <b>Appointment Date Time:</b>
+                </div>
+                <div class="col">
+                    {{ selectedReferral.appointmentDtTime | date:'dd/MM/yyyy hh:mm' }}
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col">
+                    <h4>Attachments</h4>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Document Type</th>
+                                <th>Status</th>
+                                <th>Created Date</th>
+                                <th>Indexed Date</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody *ngIf="selectedReferralDocuments.length > 0">
+                            <tr *ngFor="let document of selectedReferralDocuments">
+                                <td>{{ document.attachmentTypeText }}</td>
+                                <td>{{ document.status }}</td>
+                                <td>{{ document.createdDate | date:'dd/MM/yyyy hh:mm' }}</td>
+                                <td>{{ document.indexed | date:'dd/MM/yyyy hh:mm' }}</td>
+                                <td>
+                                    <div class="text-center">
+                                        <a href="#" (click)="onViewDocument(document)">View</a>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tbody *ngIf="selectedReferralDocuments.length == 0">
+                            <tr>
+                                <td colspan="5"><div class="text-center">No documents attached</div></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col d-flex justify-content-center">
+                    <button type="button" class="btn btn-secondary" (click)="onCloseReferral()">Close</button>
+                </div>
+            </div>            
+        </div>
+    </div>
+</div>
+
